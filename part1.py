@@ -85,9 +85,91 @@ def perceptronL(X, Y, numEpochs):
     result = np.array(theta)[np.newaxis]
     return result.T
 
+def perceptronA(X, Y, numEpochs):
+    n = Y.size
+    theta = np.zeros(X[1].size)
+    thetaA = theta
+
+    epochs = 0
+    while epochs < numEpochs:
+        missed = False
+        for i, row in enumerate(X):
+            comparator = np.dot(theta, row)
+            if np.sign(comparator) != Y[i]:
+                missed = True
+                theta = theta + Y[i] * X[i]
+                w = (1 / float(2 * n))
+                thetaA = (1 - w) * thetaA + w * theta
+
+        epochs += 1
+
+    result = np.array(thetaA)[np.newaxis]
+    return result.T
+
+def nu(epoch):
+    return 1 / (1.0 + epoch)
+
+def epoch(updates, n):
+    return int(updates / n)
+
+def hlsgdL(X, Y, l, nextIndex, numEpochs):
+    n = Y.size
+    theta = np.zeros(X[1].size)
+
+    updates = 0
+    while epoch(updates, n) < numEpochs:
+        i = nextIndex(n)
+
+        updateContribution = 0
+        if Y[i] * np.dot(theta, X[i]) <= 1:
+            updateContribution = Y[i] * X[i]
+
+        thetaBar = np.concatenate(([0], theta[1:]))
+        # print theta
+        # print thetaBar
+
+        update = l * thetaBar - updateContribution
+        theta = theta - nu(epoch(updates, n)) * (update)
+
+        # print theta
+        updates += 1
+
+    result = np.array(theta)[np.newaxis]
+    # print result.T
+    return result.T
+
+def hlsgdA(X, Y, l, nextIndex, numEpochs):
+    n = Y.size
+    theta = np.zeros(X[1].size)
+    thetaA = theta
+
+    updates = 0
+    while epoch(updates, n) < numEpochs:
+        i = nextIndex(n)
+
+        updateContribution = 0
+        if Y[i] * np.dot(theta, X[i]) <= 1:
+            updateContribution = Y[i] * X[i]
+
+        thetaBar = np.concatenate(([0], theta[1:]))
+        # print theta
+        # print thetaBar
+
+        update = l * thetaBar - updateContribution
+        theta = theta - nu(epoch(updates, n)) * (update)
+        w = (1 / float(2 * n))
+        thetaA = (1 - w) * thetaA + w * theta
+
+        # print theta
+        updates += 1
+
+    result = np.array(thetaA)[np.newaxis]
+    # print result.T
+    return result.T
+
 X1 = np.array([[1, 1, 2], [1, -1, 2], [1, 1, -2], [1, -1, -2], [1, 0, 2]])
 Y1 = np.array([[1], [1], [-1], [-1], [-1]])
-print mostPrevalentClass(X1, Y1)
+print perceptronA(X1, Y1, 10)
 
 # tweetList = tl.slurp_file('train-tweet.txt')
 # tweetList = ['OMG!! 2awful a movie.', 'Awesome++ Can you top this?']
