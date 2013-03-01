@@ -1,3 +1,5 @@
+# Will Whitney
+
 ## Project 1.2 Part C
 
 ### Experiment
@@ -47,37 +49,25 @@ Though this may be hard to see from the graphs, `perceptronA` and `hlsgdA` had v
 
 My experiment for this section was to see if including word counts in the tweet vectors, instead of just word indicator variables, would improve the accuracy of any or all of the algorithms.
 
-To do this, I implemented the functions `tweetsToXWordcounter(tweetList)`, `processFileWithCounts()`, and `cvAlgsWithWordCounts()`. These simply provide different tweet vectors to the algorithms, and then the normal cross-validation process begins.
+To do this, I implemented the functions `tweetsToXWordcounter(tweetList)`, `processFileWithCounts()`, and `cvAlgsWithWordCounts()`. These simply provide different tweet vectors to the algorithms, and then the normal cross-validation process on all the algorithms begins.
+
+These tweet vectors may now be of the form `[1 2 4 …, 0 1 0]` instead of containing only zeros and ones.
+
+The full code is included in `tweetLearner.py`.
 
 ### Results
 
 As it turned out, the results for this method were worse almost across the board than the results for the original, indicator-variable method.
 
-	Cross-validating all algorithms.
-	Results for mostPrevalentClass
-	0.332857142857
-	Results for perceptronL
-	0.181428571429
-	Results for perceptronA
-	0.151428571429
-	Results for hlsgdL
-	0.171428571429
-	Results for hlsgdA
-	0.164285714286
-	
-	Cross-validating all algorithms, using word counts.
-	Results for mostPrevalentClass
-	0.332857142857
-	Results for perceptronL
-	0.24
-	Results for perceptronA
-	0.152857142857
-	Results for hlsgdL
-	0.278571428571
-	Results for hlsgdA
-	0.16
+type               | Cross-validation (indicator) | Cross-validation (count)
+-------------------|------------------------------|-------------------------
+mostPrevalentClass | 0.332857142857               | 0.332857142857
+perceptronL        | 0.181428571429               | 0.24
+perceptronA        | 0.151428571429               | 0.152857142857
+hlsgdL             | 0.171428571429               | 0.278571428571
+hlsgdA             | 0.164285714286               | 0.16  
 
-
+While the results for `hlsgdA` are actually slightly better, this is probably simply noise.
 
 
 

@@ -159,7 +159,7 @@ def tweetsToXWordcounter(tweetList):
         X[0, i] = 1
         for word in tweet:
             X[wordDict[word], i] = wordCounts[word]
-
+    print X.T
     return X.T
 
 def processFileWithCounts(pathX = 'train-tweet.txt', pathY = 'train-answer.txt'):
