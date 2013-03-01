@@ -51,7 +51,7 @@ def plotTrainTestCurves(trainSetSizes, trainErrors, testErrors):
 
 
 
-k = 3
+k = 10
 numEpochs = 10
 l = 0.01
 
@@ -68,6 +68,7 @@ def hlsgdA(X, Y):
     return part1.hlsgdA(X, Y, l, project1.CountingIndex().fn, numEpochs)
 
 def crossValidateAll():
+    print "\nCross-validating all algorithms."
     X, Y = processFile()
     funcs = [part1.mostPrevalentClass, perceptronL, perceptronA, hlsgdL, hlsgdA]
     for func in funcs:
@@ -134,7 +135,7 @@ def tweetsToXWordcounter(tweetList):
     tweetVectors = []
 
     for tweet in tweetList:
-        words = sorted(stringToWordList(tweet))
+        words = sorted(part1.stringToWordList(tweet))
         tweetVectors.append(words)
         for word in words:
             wordList.append(word)
@@ -169,7 +170,8 @@ def processFileWithCounts(pathX = 'train-tweet.txt', pathY = 'train-answer.txt')
     (X, Y) = np.hsplit(XY, [-1])
     return (X, Y)
 
-def runAlgsWithWordCounts():
+def cvAlgsWithWordCounts():
+    print "\nCross-validating all algorithms, using word counts."
     X, Y = processFileWithCounts()
     funcs = [part1.mostPrevalentClass, perceptronL, perceptronA, hlsgdL, hlsgdA]
     for func in funcs:
@@ -177,7 +179,8 @@ def runAlgsWithWordCounts():
         print crossvalidation.CV(func, X, Y, k)
 
 
-runAlgsWithWordCounts()
+crossValidateAll()
+cvAlgsWithWordCounts()
 
 
 

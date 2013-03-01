@@ -39,3 +39,51 @@ Then, I created a function `plotAllLearningCurves()` which ran `buildLearningCur
 ![Y-axis is in error rate.](./learning_curves.png "Learning Curves")
 
 Though this may be hard to see from the graphs, `perceptronA` and `hlsgdA` had very similar results on the largest of the training samples, `perceptronA` at about 18% error and `hlsgdA` at about 16.5%. `perceptronA` seems to learn the most smoothly, but we would need more data to verify that. As might be expected, the performance of the 'last' versions of the algorithms is somewhat more unreliable than that of the 'average' versions, since there can be 'bounce', or oscillation, in the quality of whichever $$$\theta$$$ is returned.
+
+
+## Project 1.2 Part E
+
+### Experiment
+
+My experiment for this section was to see if including word counts in the tweet vectors, instead of just word indicator variables, would improve the accuracy of any or all of the algorithms.
+
+To do this, I implemented the functions `tweetsToXWordcounter(tweetList)`, `processFileWithCounts()`, and `cvAlgsWithWordCounts()`. These simply provide different tweet vectors to the algorithms, and then the normal cross-validation process begins.
+
+### Results
+
+As it turned out, the results for this method were worse almost across the board than the results for the original, indicator-variable method.
+
+	Cross-validating all algorithms.
+	Results for mostPrevalentClass
+	0.332857142857
+	Results for perceptronL
+	0.181428571429
+	Results for perceptronA
+	0.151428571429
+	Results for hlsgdL
+	0.171428571429
+	Results for hlsgdA
+	0.164285714286
+	
+	Cross-validating all algorithms, using word counts.
+	Results for mostPrevalentClass
+	0.332857142857
+	Results for perceptronL
+	0.24
+	Results for perceptronA
+	0.152857142857
+	Results for hlsgdL
+	0.278571428571
+	Results for hlsgdA
+	0.16
+
+
+
+
+
+
+
+
+
+
+
