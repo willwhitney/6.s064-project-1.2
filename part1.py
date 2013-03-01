@@ -167,9 +167,9 @@ def hlsgdA(X, Y, l, nextIndex, numEpochs):
     # print result.T
     return result.T
 
-X1 = np.array([[1, 1, 2], [1, -1, 2], [1, 1, -2], [1, -1, -2], [1, 0, 2]])
-Y1 = np.array([[1], [1], [-1], [-1], [-1]])
-print perceptronA(X1, Y1, 10)
+# X1 = np.array([[1, 1, 2], [1, -1, 2], [1, 1, -2], [1, -1, -2], [1, 0, 2]])
+# Y1 = np.array([[1], [1], [-1], [-1], [-1]])
+# print perceptronA(X1, Y1, 10)
 
 # tweetList = tl.slurp_file('train-tweet.txt')
 # tweetList = ['OMG!! 2awful a movie.', 'Awesome++ Can you top this?']
